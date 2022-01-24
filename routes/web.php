@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\{
-    UserController, };
+    UserController,
+    CategoryController,
+};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,3 +32,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Management Route Users
 Route::resource('users', UserController::class);
+
+// Manage Categories
+Route::get('/categories/trash', [CategoryController::class, 'trash'])->name('categories.trash');
+Route::get('/categories/{id}/restore', [CategoryController::class, 'restore'])->name('categories.restore');
+Route::delete('/categories/{category}/delete-permanent', [CategoryController::class, 'deletePermanent'])->name('categories.delete-permanent');
+Route::resource('categories', CategoryController::class);
