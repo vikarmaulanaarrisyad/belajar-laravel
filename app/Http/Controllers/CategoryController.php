@@ -29,6 +29,15 @@ class CategoryController extends Controller
         return view('categories.index', ['categories' => $categories]);
     }
 
+    public function ajaxSearch(Request $request)
+    {
+        $keyword = $request->get('q');
+
+        $categories = Category::where("name", "LIKE", "%$keyword%")->get();
+
+        return $categories;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -144,10 +153,11 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()->route('categories.index')
-        ->with('status', 'Category successfully moved to trash');
+            ->with('status', 'Category successfully moved to trash');
     }
 
-    public function trash () {
+    public function trash()
+    {
         $deleted_category = Category::onlyTrashed()->paginate(10);
 
         return view('categories.trash', ['categories' => $deleted_category]);
@@ -161,11 +171,11 @@ class CategoryController extends Controller
             $category->restore();
         } else {
             return redirect()->route('categories.index')
-            ->with('status', 'Category is not in trash');
+                ->with('status', 'Category is not in trash');
         }
 
         return redirect()->route('categories.index')
-        ->with('status', 'Category successfully restored');
+            ->with('status', 'Category successfully restored');
     }
 
     public function deletePermanent($id)
@@ -174,12 +184,12 @@ class CategoryController extends Controller
 
         if (!$category->trashed()) {
             return redirect()->route('categories.index')
-            ->with('status', 'Can not delete permanent active category');
+                ->with('status', 'Can not delete permanent active category');
         } else {
             $category->forceDelete();
 
             return redirect()->route('categories.index')
-            ->with('status', 'Category permanently deleted');
+                ->with('status', 'Category permanently deleted');
         }
     }
 }

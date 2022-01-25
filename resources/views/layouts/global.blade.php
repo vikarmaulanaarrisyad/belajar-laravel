@@ -84,6 +84,7 @@
                     </li>
                     <li><a href="{{route('categories.index')}}"><span class="oi oi-tag"></span> Manage Categories</a>
                     </li>
+                    <li><a href="{{route('books.index')}}"><span class="oi oi-book"></span> Manage Books</a></li>
 
                     <div class="d-block d-md-none">
                         <div class="dropdown-divider"></div>
@@ -120,6 +121,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    @yield('footer-scripts')
 </body>
 
 </html>
