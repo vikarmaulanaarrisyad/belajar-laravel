@@ -70,8 +70,9 @@ class BookController extends Controller
 
         $new_book->created_by = Auth::user()->id; //menangkap id user
 
-        $new_book->save();
+        $new_book->save(); // save to table book
 
+        // Save to pivot table
         $new_book->categories()->attach($request->get('categories'));
 
         if ($request->get('save_action') == 'PUBLISH') {
